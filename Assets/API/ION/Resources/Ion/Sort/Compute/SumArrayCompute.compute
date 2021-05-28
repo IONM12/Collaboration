@@ -1,0 +1,27 @@
+﻿///////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma kernel Main
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+StructuredBuffer<int> CountArrayBuffer;
+RWStructuredBuffer<int> SumArrayBuffer;
+RWStructuredBuffer<int> SumBuffer;
+int Count;
+//---------------------------------------------------------------------------------------------
+[numthreads(16,1,1)]
+//---------------------------------------------------------------------------------------------
+void Main (uint3 id : SV_DispatchThreadID)
+{
+	int index = id.x;
+
+	int sum = 0;
+	for (int i = 0; i < Count; i++)
+	{
+		int offset = i * 256 + index;
+		
+		SumArrayBuffer[offset] = sum;
+
+		sum += CountArrayBuffer[offset];
+	}
+
+	SumBuffer[index] = sum;
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////

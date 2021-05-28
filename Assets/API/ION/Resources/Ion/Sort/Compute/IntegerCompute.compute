@@ -1,0 +1,36 @@
+﻿///////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma kernel Main
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+StructuredBuffer<float> SourceBuffer;
+RWStructuredBuffer<int> IntegerBuffer;
+float Count;
+//---------------------------------------------------------------------------------------------
+[numthreads(16,1,1)]
+//---------------------------------------------------------------------------------------------
+void Main (uint3 id : SV_DispatchThreadID)
+{
+	int index = id.x;
+
+	uint start = index * Count;
+	uint stop = (index + 1) * Count;
+	
+	for (uint i = start; i < stop; i++)
+	{
+		float value = SourceBuffer[i];
+
+		float d = max(0.000001, value);
+
+		float e;
+
+		uint m = 16777216 * frexp(d, e);
+		uint ex = (uint) (e + 128) & 255;
+		
+		int b1 = m & 255;
+		int b2 = (m >> 8) & 255;
+		int b3 = (m >> 16) & 255;
+		int b4 = ex;
+
+		IntegerBuffer[i] = b1 | (b2 << 8) | (b3 << 16) | (b4 << 24);
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////

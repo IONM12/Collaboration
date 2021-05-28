@@ -1,0 +1,36 @@
+﻿///////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma kernel Main
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+StructuredBuffer<int> IntegerBuffer;
+StructuredBuffer<int> SourceIndexBuffer;
+RWStructuredBuffer<int> CountArrayBuffer;
+float Count;
+//---------------------------------------------------------------------------------------------
+[numthreads(16,1,1)]
+//---------------------------------------------------------------------------------------------
+void Main (uint3 id : SV_DispatchThreadID)
+{
+	int index = id.x;
+
+	uint start = index * Count;
+	uint stop = (index + 1) * Count;
+	
+	int offset = index * 256;
+
+	//Clear All Index
+	for(int j = 0; j < 256; j++)
+	{
+		CountArrayBuffer[offset + j] = 0;
+	}
+
+	//Counting all offsets
+	for (uint i = start; i < stop; i++)
+	{
+		int sourceIndex = SourceIndexBuffer[i];
+
+		int value = (IntegerBuffer[sourceIndex] >> 8) & 255;
+
+		CountArrayBuffer[offset + value]++;
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////
