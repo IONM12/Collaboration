@@ -123,7 +123,7 @@ namespace Collaboration
 		//====================================================================================================
 		void OnGUI()
 		{
-			UI.depth = 0;
+			UI.depth = 1;
 
 			for (int i = 0; i < VideoPlayerList.Count; i++)
 			{

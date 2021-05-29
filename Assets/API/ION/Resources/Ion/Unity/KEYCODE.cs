@@ -64,6 +64,8 @@ namespace Ion
 		Escape = KeyCode.Escape,
 		Space = KeyCode.Space,
 		S = KeyCode.S,
+		F1 = KeyCode.F1,
+		F2 = KeyCode.F2,
 
 	}
 }
