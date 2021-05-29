@@ -1,6 +1,6 @@
 # Collaborative Teamworks
 
-This project demonstrates how to collaborate on transparent layer and with multiuser applications.
+This project demonstrates how to collaborate with TeamWorks, that is MultiUser, MultiPointer and MultiLayer surface.
 
 ![Screenshot](TeamworksLogo.jpg)
 
