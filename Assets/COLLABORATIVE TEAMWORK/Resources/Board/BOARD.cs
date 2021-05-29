@@ -65,6 +65,8 @@ namespace Collaboration
 	{
 		// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 		//----------------------------------------------------------------------------------------------------
+		TEXTURE ToolPanelTexture = "Pointer/Texture/ToolPanelTexture";
+		//----------------------------------------------------------------------------------------------------
 		TEXTURE BoardTexture = "Board/Texture/BoardTexture";
 		TEXTURE BrushTexture = "Board/Texture/BrushTexture";
 		//----------------------------------------------------------------------------------------------------
@@ -77,6 +79,9 @@ namespace Collaboration
 		bool DrawingFlag = false;
 		//----------------------------------------------------------------------------------------------------
 		MESH RectangleMesh;
+		//----------------------------------------------------------------------------------------------------
+		bool ToolPanelFlag = false;
+		float ToolSize = 1;
 		//----------------------------------------------------------------------------------------------------
 		// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
@@ -109,6 +114,16 @@ namespace Collaboration
 			if (SystemInput.GetMouseButtonUp(0))
 			{
 				DrawingFlag = false;
+			}
+
+			if (SystemInput.GetMouseButtonDown(1))
+			{
+				ToolPanelFlag = true;
+			}
+
+			if (SystemInput.GetMouseButtonUp(1))
+			{
+				ToolPanelFlag = false;
 			}
 
 
@@ -148,7 +163,12 @@ namespace Collaboration
 
 			UI.DrawTexture(new RECTANGLE(225, 10, SCREEN.width - 450, SCREEN.height - 100), DrawingRenderTexture);
 
-			UI.Label(new RECTANGLE(400, 500, 500, 100), "mouse : " + MousePosition);
+			if (ToolPanelFlag)
+			{
+				float size = 200 * ToolSize;
+				UI.DrawTexture(new RECTANGLE(MousePosition.x - size * 0.5f, MousePosition.y - size * 0.5f, size, size), ToolPanelTexture);
+			}
+
 		}
 		//====================================================================================================
 		void CreateRectangleMesh()

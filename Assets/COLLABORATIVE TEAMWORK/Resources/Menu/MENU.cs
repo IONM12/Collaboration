@@ -67,8 +67,8 @@ namespace Collaboration
 		//----------------------------------------------------------------------------------------------------
 		TEXTURE MenuTexture = "Menu/Texture/MenuTexture";
 		//----------------------------------------------------------------------------------------------------
-		bool BoardFlag = false;
-		bool GameFlag = false;
+		bool BoardFlag = true;
+		bool GameFlag = true;
 		//----------------------------------------------------------------------------------------------------
 		GAMEOBJECT Game;
 		GAMEOBJECT Board;
