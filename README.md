@@ -4,5 +4,7 @@ This project demonstrates how to collaborate on transparent layer and with multi
 
 ![Screenshot](TeamworksLogo.jpg)
 
+![Screenshot](Screenshot.jpg)
+
 *Video Demo*    
 
